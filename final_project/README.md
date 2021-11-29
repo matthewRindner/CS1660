@@ -15,3 +15,6 @@
 
 [Driver](https://hub.docker.com/repository/docker/mvr17/cs1660-final-project)
 #
+Pull command for GUI docker image
+
+`docker push mvr17/cs1660-final-project:tagname`
