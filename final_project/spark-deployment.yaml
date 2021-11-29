@@ -1,0 +1,40 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spark
+  labels:
+    app: spark
+spec:
+  selector:
+    matchLabels:
+      app: spark
+  replicas: 1
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: spark
+    spec:
+      containers:
+        - image: docker.io/bitnami/spark:3
+          imagePullPolicy: Always
+          name: spark
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPARK_MODE
+              value: "master"
+              name: SPARK_RPC_AUTHENTICATION_ENABLED
+              value: "no"
+              name: SPARK_RPC_ENCRYPTION_ENABLED
+              value: "no"
+              name: SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED
+              value: "no"
+              name: SPARK_SSL_ENABLED
+              value: "no"
