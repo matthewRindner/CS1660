@@ -20,7 +20,10 @@ def main():
     jupyter_button = tk.Button(root, text='Jupyter Notebook', command=open_jupyter)
     jupyter_button.pack(side='top')
 
-    sonar_button = tk.Button(root, text='SonarQube and SonarScanner', command=open_sonar)
+    sonar_button = tk.Button(root, text='SonarQube', command=open_sonarqube)
+    sonar_button.pack(side='top')
+    
+    sonar_button = tk.Button(root, text='SonarScanner', command=open_sonarscanner)
     sonar_button.pack(side='top')
 
     root.mainloop()
@@ -34,7 +37,10 @@ def open_spark():
 def open_jupyter():
     pass
 
-def open_sonar():
+def open_sonarqube():
+    pass
+
+def open_sonarscanner():
     pass
 
 if __name__ == '__main__':
