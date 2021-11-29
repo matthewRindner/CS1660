@@ -3,7 +3,7 @@ import tkinter as tk
 def main():
     print("hi")
     root = tk.Tk()
-    root.title('CS1660 Project 1 GUI Driver')
+    root.title('CS1660 Project Driver')
     root['background']='yellow'
     root.geometry('600x200')
 
