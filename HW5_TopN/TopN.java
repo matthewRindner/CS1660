@@ -26,7 +26,8 @@ public class TopN {
 	    private static PriorityQueue<Entry<String, Integer>> pq;
 	    
 	    @Override
-	    public void setup(Context context) throws IOException, InterruptedException {
+	    public void setup(Context context) throws IOException, InterruptedException 
+	    {
 	    	pq = new PriorityQueue<Map.Entry<String, Integer>>(new Comparator<Map.Entry<String, Integer>>(){
 	    		@Override
 	    		public int compare(Map.Entry<String, Integer> one, Map.Entry<String, Integer> two) {
@@ -40,11 +41,12 @@ public class TopN {
 	    }
 	    
 	    @Override
-		public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
+		{
 	    	//data cleaning
-	    	String line = value.toString().replaceAll("[^a-zA-Z0-9\\s]", "").toLowerCase();
+	    	String words = value.toString().replaceAll("[^a-zA-Z0-9\\s]", "").toLowerCase();
 	    	
-	    	StringTokenizer tokenizer = new StringTokenizer(line);
+	    	StringTokenizer tokenizer = new StringTokenizer(words);
 	    	
 	    	while(tokenizer.hasMoreTokens()) {
 	    		String token = tokenizer.nextToken();
@@ -54,13 +56,13 @@ public class TopN {
 	    		if(!map.containsKey(token)) {
 	    			map.put(token, 1);
 	    		} else {
-	    			Integer temp = map.get(token) + 1;
-	    			map.replace(token, temp);
+	    			Integer tempCount = map.get(token) + 1;
+	    			map.replace(token, tempCount);
 	    		}
 	    	}
 	    	
 	    	Iterator<Map.Entry<String, Integer>> mapIterator = map.entrySet().iterator();
-	    	
+	    	//removes objects from the pq once the limit of 5 has been reached
 	    	while(mapIterator.hasNext()) {
 	    		pq.add(mapIterator.next());
 	    		if(pq.size() > 5) {
